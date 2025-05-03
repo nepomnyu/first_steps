@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { MainPage } from '../../models/MainPage';
 
 test.describe('Играемся с группами', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://playwright.dev/');
+    const mainPage = new MainPage(page);
+    await mainPage.openMainPage();
   });
   test('Check selector and href attribute', async ({ page }) => {
     await expect(page.getByRole('link', { name: 'Playwright logo Playwright' })).toBeVisible();

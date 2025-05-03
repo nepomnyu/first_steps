@@ -1,10 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { MainPage } from '../../models/MainPage';
 
 const ligtMods = ['light', 'dark'];
 
 test.describe('Скрин тест', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://playwright.dev/');
+    const mainPage = new MainPage(page);
+    await mainPage.openMainPage();
   });
 
   ligtMods.forEach((value) => {
