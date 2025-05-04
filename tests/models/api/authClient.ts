@@ -18,4 +18,14 @@ export class AuthClient {
       },
     });
   }
+
+  async post(endpoint: string, payload: object): Promise<APIResponse> {
+    return await this.request.post(`${this.baseURL}${endpoint}`, {
+      headers: {
+        'x-api-key': this.apiKey,
+        'Content-Type': 'application/json',
+      },
+      data: payload,
+    });
+  }
 }

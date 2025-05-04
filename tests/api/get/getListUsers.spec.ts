@@ -9,7 +9,7 @@ test.describe('Проверка метода /users', () => {
     auth = new AuthClient(request);
   });
 
-  test('Проверка получения пользователя по ID', async () => {
+  test('Case1. Проверка получения пользователя по ID', async () => {
     await test.step('Проверка запроса по ID', async () => {
       const response = await auth.get('users?id=1');
       //Оставил, что б показать работу с ответом
@@ -30,7 +30,7 @@ test.describe('Проверка метода /users', () => {
   /*Оставляю, что б заюзать аннотацю test.fail + сознательно не покрываю валидацию email, тк ее нет.
    В реальном проекте я бы тестировал все сценарии, связанные с валидацией email-формы: пустое значение, 
    некорректный формат, граничные длины и тд  */
-  test('Фильтрация по email', async () => {
+  test('Case2. Фильтрация по email', async () => {
     test.fail(true, 'В методе не работает фильтрация по email — ожидаем падение');
     await test.step('Позитивный кейс: Проверка запроса по существующему email', async () => {
       const email = 'janet.weaver@reqres.in';
@@ -53,7 +53,7 @@ test.describe('Проверка метода /users', () => {
     });
   });
 
-  test('Негативный кейс: пользователь с несуществующим email не найден', async () => {
+  test('Case3. Негативный кейс: пользователь с несуществующим email не найден', async () => {
     const fakeEmail = 'user@reqres.in';
 
     await test.step(`Проверка запроса по НЕсуществующему email: ${fakeEmail}`, async () => {
@@ -69,7 +69,7 @@ test.describe('Проверка метода /users', () => {
   В реальном проекте покрывал бы валидацию в соответствии с типом инт:
   мин и макс инта, массив строк и чисел, строка, null, boolean в зависимости от требований дробное значение,
   */
-  test('Проверка валидации поля ID (не число)', async () => {
+  test('Case4. Проверка валидации поля ID (не число)', async () => {
     await test.step('Отправляем с не валидным значением для ID. id=asd', async () => {
       const response = await auth.get('users?id=asd');
 
@@ -82,7 +82,7 @@ test.describe('Проверка метода /users', () => {
     });
   });
 
-  test('Проверка получения пользователя по ID и emeil', async () => {
+  test('Case5. Проверка получения пользователя по ID и emeil', async () => {
     await test.step('Проверка запроса по ID=1 и emeil=george.bluth@reqres.in', async () => {
       const response = await auth.get('users?email=george.bluth@reqres.in&id=1');
 
